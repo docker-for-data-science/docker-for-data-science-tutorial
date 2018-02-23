@@ -69,29 +69,7 @@
 
 1. Break (15 minutes; total time: 1 hour 35 min)
 
-1. Introduction to Project and related Topics - Lecture (10 minutes; total time: 1 hour 45 min)
-    * Project Description
-        * Note: We are thinking of building out a classification model in Jupyter, pickling it and wrapping it with a REST API inside of a container (using Flask RESTful). We will plug this container into our web application that is powered by Docker Compose. This web application will have a front end which allows users to upload CSV files; app will create predictions based on input and store data inside of a Postgres database container. This project is subject to change.
-    * Overview of `pickle` and the benefits of serialization
-    * What is REST and how can we interact with APIs?
-
-1. Building and pickling ML model - Hands-on Lab (5 minutes; total time: 1 hour 50 min)
-    * We will provide a Jupyter notebook containing a pre-built model with a few empty cells for Exercises
-    * Students will:
-        * Save tuned model to disk
-        * Load pickled model from disk
-        * Make predictions using model and given inputs
-    * This notebook serves as the basis for the Flask container
-
-1. Build REST API Container - Lecture / Demonstration (10 minutes; total time: 2 hours)
-    * Walk through the process of extracting the required code from Jupyter and putting it the provided Flask RESTful template
-    * Fill in template Dockerfile
-    * Build image and launching container
-    * Testing endpoint works with  `requests.get()`
-
-1. Build REST API Container - Hands-on Lab (10 minutes; total time: 2 hours 10 min)
-
-1. Docker Compose Overview - Lecture (20 minutes; total time: 2 hours 30 min)
+1. Docker Compose Overview - Lecture (20 minutes; total time: 1 hour 55 min)
     * In context of multi-container Data Science applications.
     * Introduce Docker Compose and provide a high-level overview of its core concepts and operation.
     * Overall Goals of Compose Integration:
@@ -105,8 +83,30 @@
         * Introduce concepts such as services, ports, volumes, networks, environment variables, and much more.
         * Work through common issues with Compose.
     * Demonstrate how to execute a Docker Compose file.
+    * Aside: what is REST and how can we interact with APIs?
 
-1. Build and Launch Data Application - Lecture / Demonstration (10 minutes; 2 hours 40 minutes)
+1. Introduction to Project and related Topics - Lecture (10 minutes; total time: 2 hour 5 min)
+    * Project Description
+        * Note: We are thinking of building out a classification model in Jupyter, pickling it and wrapping it with a REST API inside of a container (using Flask RESTful). We will plug this container into our web application that is powered by Docker Compose. This web application will have a front end which allows users to upload CSV files; app will create predictions based on input and store data inside of a Postgres database container. This project is subject to change.
+    * Overview of `pickle` and the benefits of serialization
+
+1. Building and pickling ML model - Hands-on Lab (5 minutes; total time: 2 hour 10 min)
+    * We will provide a Jupyter notebook containing a pre-built model with a few empty cells for Exercises
+    * Students will:
+        * Save tuned model to disk
+        * Load pickled model from disk
+        * Make predictions using model and given inputs
+    * This notebook serves as the basis for the Flask container
+
+1. Build REST API Container - Lecture / Demonstration (10 minutes; total time: 2 hours 20 min)
+    * Walk through the process of extracting the required code from Jupyter and putting it the provided Flask RESTful template
+    * Fill in template Dockerfile
+    * Build image and launching container
+    * Testing endpoint works with `requests.get()`
+
+1. Build REST API Container - Hands-on Lab (10 minutes; total time: 2 hours 30 min)
+
+1. Build and Launch Data Application - Lecture / Demonstration (10 minutes; 2 hours 40 min)
     * Begin integrating previous project into a Docker Compose-based workflow.
         * Introduce Docker images needed for this project
             * Dockerfile-based image, Nginx, and Postgres
