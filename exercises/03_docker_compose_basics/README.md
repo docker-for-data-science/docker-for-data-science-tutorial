@@ -22,6 +22,12 @@ This set of exercises will help you get familiar with the Docker Compose.
   docker-compose up
   ```
 
+  Then stop the services.
+  
+  ```command
+  Ctrl-c
+  ```
+
 2. Build and run in the same step and run in the background.
 
   ```command
