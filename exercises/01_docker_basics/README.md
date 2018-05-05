@@ -4,9 +4,9 @@ This set of exercises will help you get familiar with the Docker workflow.
 
 ## Exercise A: Pull Image from Docker Hub
 
-*[DockerHub](https://hub.docker.com) is a public [registry](https://docs.docker.com/registry/) where you can find and download Docker images. This is where you will find official Docker images for Linux distributions, databases, and Python.*
+> [DockerHub](https://hub.docker.com) is a public [registry](https://docs.docker.com/registry/) where you can find and download Docker images. This is where you will find official Docker images for Linux distributions, databases, and Python.
 
-> **Tip:** Check out [Project Jupyter on DockerHub](https://hub.docker.com/r/jupyterhub) for lots of great pre-built Docker images!.
+***Tip:** Check out [Project Jupyter on DockerHub](https://hub.docker.com/r/jupyterhub) for lots of great pre-built Docker images!*
 
 1. We will start by pulling an image from DockerHub to our local machine using the [`docker pull`](https://docs.docker.com/engine/reference/commandline/pull/) command. We will use this image for the rest of tutorial:
 
@@ -23,7 +23,7 @@ python                                    3.6.5-alpine3.7     27e79c0fa4d2      
 
 ## Exercise B: Create Container
 
-*We can create containers from an image. Think of images like a cookiecutter.*
+> We can create containers from an image. Think of images like a cookiecutter.
 
 1. Taking a look at the [Dockerfile](https://github.com/docker-library/python/blob/b99b66406ebe728fb4da64548066ad0be6582e08/3.6/alpine3.7/Dockerfile) for the image we pulled, it will run `python3` when a container is created.
 
@@ -35,13 +35,13 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ```
 
-> **Tip:** `docker run` has lots of [options](https://docs.docker.com/engine/reference/commandline/run/#options)
+***Tip:** `docker run` has lots of [options](https://docs.docker.com/engine/reference/commandline/run/#options)*
 
 2. We are at the Python shell prompt inside of the container. Use `Ctrl + P + Q` to dettach from the container and return to your prompt.
 
 ## Exercise C: Stop Container
 
-*Dettacing from the container means it is still running in the background.*
+> Dettacing from the container means it is still running in the background.
 
 1. We can take a look at all running container using the [`docker ps`](https://docs.docker.com/engine/reference/commandline/ps) command:
 
