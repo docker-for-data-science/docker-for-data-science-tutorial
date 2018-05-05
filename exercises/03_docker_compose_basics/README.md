@@ -8,7 +8,7 @@ This set of exercises will help you get familiar with the Docker Compose.
 
   ```yaml
   ---
-  version: '3.6'
+  version: '2'
   services:
     app:
       image: python:3.6.5
@@ -79,7 +79,7 @@ This set of exercises will help you get familiar with the Docker Compose.
 
   ```yaml
   ---
-  version: '3.6'
+  version: '2'
   services:
     app:
       image: python:3.6.5
@@ -166,7 +166,7 @@ This set of exercises will help you get familiar with the Docker Compose.
 
     ```yaml
     ---
-    version: '3.6'
+    version: '2'
     services:
       app:
         image: python:3.6.5
@@ -244,7 +244,7 @@ This set of exercises will help you get familiar with the Docker Compose.
 
   ```yaml
   ---
-  version: '3.6'
+  version: '2'
   services:
      app:
        build: .
