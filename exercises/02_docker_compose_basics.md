@@ -147,7 +147,7 @@ This set of exercises will help you get familiar with the Docker Compose.
   exit
   ```
 
-  Enter the container using the run command and touch a file and exit.
+  Enter the container again and look for the touch file.
 
   ```command
   docker-compose run app /bin/bash
