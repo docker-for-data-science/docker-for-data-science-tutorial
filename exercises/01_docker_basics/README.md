@@ -50,7 +50,7 @@ CONTAINER ID        IMAGE                    COMMAND             CREATED        
 8d5d1420dd97        python:3.6.5-alpine3.7   "python3"           20 minutes ago      Up 20 minutes                           quirky_rosalind
 ```
 
-> **Tip:** Use `docker ps -a` to view all stopped containers. Containers stop when the process we are running inside of the container is exited (or killed).
+***Tip:** Use `docker ps -a` to view all stopped containers. Containers stop when the process we are running inside of the container is exited (or killed).*
 
 2. Use [`docker stop`](https://docs.docker.com/engine/reference/commandline/stop) with your container name to stop the container.
 
@@ -59,7 +59,7 @@ $ docker stop quirky_rosalind
 quirky_rosalind
 ```
 
-> **Tip:** We can use both the [container-name] or [container-id] to refer to containers.
+***Tip:** We can use both the [container-name] or [container-id] to refer to containers.*
 
 3. Confirm this container has stopped using `docker ps -a`.
 
@@ -76,7 +76,7 @@ quirky_rosalind
 
 ## Exercise E: Shell into container
 
-*In Exercise 2, we created a container which ran the `python3` shell after it launched. This default command was set in the `Dockerfile` of the image we pulled.*
+> In Exercise 2, we created a container which ran the `python3` shell after it launched. This default command was set in the `Dockerfile` of the image we pulled.
 
 1. We can override the default container launch command by passing in parameters when we create a container using [`docker run`](https://docs.docker.com/engine/reference/commandline/run):
 
@@ -87,13 +87,13 @@ $ docker run -it python:3.6.5-alpine3.7 /bin/sh
 
 We are now inside the shell of the container.
 
-> **Tip:** If your imagine contains the bash shell, you can get to that prompt using `/bin/bash`
+***Tip:** If your imagine contains the bash shell, you can get to that prompt using `/bin/bash`*
 
-> **Tip:** Alpine is a lightweight Docker image sans frills
+***Tip:** Alpine is a lightweight Docker image sans frills*
 
 ## Exercise F: Hello World Dockerfile
 
-*A [`Dockerfile`](https://docs.docker.com/engine/reference/builder/) is a file that contains commands that are used to build a Docker image. We can write a `Dockerfile` to create custom images that contain only the things we want*
+> A [`Dockerfile`](https://docs.docker.com/engine/reference/builder/) is a file that contains commands that are used to build a Docker image. We can write a `Dockerfile` to create custom images that contain only the things we want.
 
 1. Create a python file that prints "Hello World" and save it as `hello_world.py`:
 
@@ -145,11 +145,11 @@ Successfully tagged hello-world:latest
 
 6. Restart the image using `docker start -ia [container-name / container-id]`. You should see `Hello World` printed to the console once again.
 
-> Tip: `-i` attaches STDIN and `-a` attaches STDOUT/STDERR to terminal
+***Tip:** `-i` attaches STDIN and `-a` attaches STDOUT/STDERR to terminal*
 
 ## Exercise G: Delete Image
 
-*Confirm you do not need a Docker image anymore before you delete it from your machine*
+> Confirm you do not need a Docker image anymore before you delete it from your machine
 
 1. Let's pull a [BusyBox](https://en.wikipedia.org/wiki/BusyBox) image from DockerHub. BusyBox is an executible that contains stripped down Unix tools:
 
