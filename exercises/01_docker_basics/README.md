@@ -4,9 +4,9 @@ This set of exercises will help you get familiar with the Docker workflow.
 
 ## Exercise A: Pull Image from Docker Hub
 
-*DockerHub is a public [registry](https://docs.docker.com/registry/) where you can find and download Docker images. This is where you will find official Docker images for Linux distributions, databases, and Python.*
+*[DockerHub](https://hub.docker.com) is a public [registry](https://docs.docker.com/registry/) where you can find and download Docker images. This is where you will find official Docker images for Linux distributions, databases, and Python.*
 
-> **Tip:** Check out [Project Jupyter on DockerHub](https://hub.docker.com/r/jupyterhub) fr lots of great pre-built Docker images!.
+> **Tip:** Check out [Project Jupyter on DockerHub](https://hub.docker.com/r/jupyterhub) for lots of great pre-built Docker images!.
 
 1. We will start by pulling an image from DockerHub to our local machine using the [`docker pull`](https://docs.docker.com/engine/reference/commandline/pull/) command. We will use this image for the rest of tutorial:
 
