@@ -52,7 +52,7 @@ This set of exercises will help you get familiar with the Docker Compose.
   docker-compose restart
   ```
 
-  Or
+  You can restart the service based on the service name as defined in the docker-compose.yml.  In this case, there is a service called `app`
 
   ```command
   docker-compose restart app
