@@ -84,8 +84,8 @@ This set of exercises will help you get familiar with the Docker Compose.
     app:
       image: python:3.6.5
       command: ["python", "-m", "http.server", "8000"]
-    ports:
-      - "8000:8000"
+      ports:
+        - "8000:8000"
   ```
 
   Build and run
