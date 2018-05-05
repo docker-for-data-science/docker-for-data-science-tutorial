@@ -10,6 +10,14 @@ We refer to this as the ["Works on my Machine" problem](https://blog.codinghorro
 
 With Docker, we can package up our notebook, data, and dependencies into a single image. We can upload this image to [Docker Hub](https://hub.docker.com/) for our users to download.
 
+### Create Docker Hub Account
+
+1. Go to [https://hub.docker.com/](https://hub.docker.com/)
+
+2. Sign up for an account
+
+3. You will need your user name later
+
 ### Downloading Notebook and Data
 
 1. Create a new folder for this project:
@@ -94,4 +102,14 @@ CMD ["jupyter", "notebook", "--ip='*'", "--port=8888", "--no-browser", "--allow-
 
 ### Building Image
 
->
+> Recall that `docker build` creates an image from a `Dockerfile`
+
+1. In the current directory, we can build an image as follows:
+
+`docker build -t docker build -t [docker-hub-user-name]/workflow1-self-contained .`
+
+2. Test image was built successfully by creating a container:
+
+`docker run -p 9999:8888 alysivji/workflow1-self-contained`
+
+
