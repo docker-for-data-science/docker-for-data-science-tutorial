@@ -6,17 +6,13 @@ This set of exercises will help you get familiar with the Docker workflow.
 
 > [DockerHub](https://hub.docker.com) is a public [registry](https://docs.docker.com/registry/) where you can find and download Docker images. This is where you will find official Docker images for Linux distributions, databases, and Python.
 
-***Tip:** Check out [Project Jupyter on DockerHub](https://hub.docker.com/r/jupyterhub) for lots of great pre-built Docker images!*
-
 1. We will start by pulling an image from DockerHub to our local machine using the [`docker pull`](https://docs.docker.com/engine/reference/commandline/pull/) command. We will use this image for the rest of tutorial:
 
 ```command
-docker pull python:3.6.5-alpine3.7
+$ docker pull python:3.6.5-alpine3.7
 ```
 
 ***Tip:** `docker pull` defaults to DockerHub. Can also pull from a [different registry](https://docs.docker.com/engine/reference/commandline/pull/#pull-from-a-different-registry).*
-
-Check out [Project Jupyter on DockerHub](https://hub.docker.com/r/jupyterhub) for lots of great pre-built Docker images!*
 
 2. We can take a look at all images on our machine using the [`docker images`](https://docs.docker.com/engine/reference/commandline/images/) command:
 
@@ -24,6 +20,8 @@ Check out [Project Jupyter on DockerHub](https://hub.docker.com/r/jupyterhub) fo
 REPOSITORY                                TAG                 IMAGE ID            CREATED             SIZE
 python                                    3.6.5-alpine3.7     27e79c0fa4d2        13 days ago         87.4MB
 ```
+
+***Tip:** Check out [Project Jupyter on DockerHub](https://hub.docker.com/r/jupyterhub) for lots of great pre-built Docker images!*
 
 ## Exercise B: Create Container
 
@@ -41,11 +39,11 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 ***Tip:** `docker run` has lots of [options](https://docs.docker.com/engine/reference/commandline/run/#options)*
 
-2. We are at the Python shell prompt inside of the container. Use `Ctrl + P + Q` to dettach from the container and return to your prompt.
+2. We are at the Python shell prompt inside of the container. Use `Ctrl + P + Q` to detach from the container and return to your prompt.
 
 ## Exercise C: Stop Container
 
-> Dettacing from the container means it is still running in the background.
+> Detaching from the container means it is still running in the background.
 
 1. We can take a look at all running container using the [`docker ps`](https://docs.docker.com/engine/reference/commandline/ps) command:
 
@@ -63,7 +61,7 @@ $ docker stop quirky_rosalind
 quirky_rosalind
 ```
 
-***Tip:** We can use both the [container-name] or [container-id] to refer to containers.*
+***Tip:** We can use either the [container-name] or [container-id] to refer to containers.*
 
 3. Confirm this container has stopped using `docker ps -a`.
 
@@ -91,6 +89,6 @@ $ docker run -it python:3.6.5-alpine3.7 /bin/sh
 
 We are now inside the shell of the container.
 
-***Tip:** If your imagine contains the bash shell, you can get to that prompt using `/bin/bash`*
+***Tip:** If your image contains the bash shell, you can get to that prompt using `/bin/bash`*
 
-***Tip:** Alpine is a lightweight Docker image sans frills*
+***Tip:** Alpine is a lightweight Docker image with no frills*

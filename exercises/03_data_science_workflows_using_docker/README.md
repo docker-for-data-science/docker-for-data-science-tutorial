@@ -16,7 +16,7 @@ With Docker, we can package up our notebook, data, and dependencies into a singl
 
 2. Sign up for an account
 
-3. You will need your user name later
+3. You will need your user name later.
 
 ### Downloading Notebook and Data
 
@@ -100,16 +100,120 @@ EXPOSE 8888
 CMD ["jupyter", "notebook", "--ip='*'", "--port=8888", "--no-browser", "--allow-root"]
 ```
 
-### Building Image
+7. Confirm directory structure looks as follows:
+
+```console
+.
+├── Dockerfile
+├── data
+│   └── iris.csv
+└── iris-analysis.ipynb
+```
+
+### Build Image
 
 > Recall that `docker build` creates an image from a `Dockerfile`
 
-1. In the current directory, we can build an image as follows:
+1. In the `self-contained-container` directory, we can build an image as follows:
 
-`docker build -t docker build -t [docker-hub-user-name]/workflow1-self-contained .`
+`docker build -t [docker-hub-user-name]/workflow1-self-contained .`
 
 2. Test image was built successfully by creating a container:
 
-`docker run -p 9999:8888 alysivji/workflow1-self-contained`
+`docker run -p 8888:8888 [docker-hub-user-name]/workflow1-self-contained`
 
+3. Confirm we can open the notebook and recalculate cells by going to the URL of the Jupyter process running in the container.
 
+4. `Ctrl+c` to stop the process
+
+### Push Image to Docker Hub (extra credit)
+
+1. Log in to your user account using `docker login`
+
+2. Push image to Docker Hub using `docker push`
+
+```console
+docker [docker-hub-user-name]/workflow1-self-contained
+```
+
+Users are able to download our image using `docker pull`.
+
+## Exercise B: Data Science Project
+
+Those of us who work on a team know how hard it is to create a standardize development environment. Or if you have ever updated a dependency and had everything break, you understand the importance of keeping development environments isolated.
+
+Using Docker, we can creaate a project / team image with our development environment and mount a volume with our notebooks and data.
+
+The benefits of this workflow are that we can:
+* Separate out projects
+* Spin up a container to onboard new employees
+* Build an automated testing pipeline to confirm upgrade dependencies do not break code
+
+### Create Dockerfile
+
+1. Create a new folder for this project:
+
+```console
+mkdir data-science-project && cd data-science-project
+```
+
+2. Create a `Dockerfile` in the `data-science-project` folder
+
+3. We need to specify which image we are building off of. Let's use `continuumio/miniconda3` as conda is popular in the Data Science community.
+
+```dockerfile
+FROM continuumio/miniconda3
+```
+
+4. Set the working directory:
+
+```dockerfile
+WORKDIR /app
+```
+
+5. `conda install` some required libraries, make sure to clean up the cache.
+
+```dockerfile
+RUN conda install jupyter -y && \
+    conda install pandas -y && \
+    conda clean -y -all
+```
+
+6. In order to connect to the Jupyter instance that is running inside of the container, we will need to set up port forwarding.
+
+```dockerfile
+EXPOSE 8888
+```
+
+7. Create a mountpoint inside of our container:
+
+```dockerfile
+VOLUME /app
+```
+
+8. Start Jupyter when the container launches:
+
+```Dockerfile
+CMD ["jupyter", "notebook", "--ip='*'", "--port=8888", "--no-browser", "--allow-root"]
+```
+
+9. Confirm directory structure looks as follows:
+
+```console
+.
+└── Dockerfile
+```
+
+### Build Image
+
+1. In the `data-science-project` folder, we can build an image as follows:
+
+`docker build -t workflow2-data-science-project .`
+
+2. Test image was built successfully by creating a container and mounting a directory. For this, you use the full path to a directory on your machine.
+
+`docker run -p 8888:8888 -v /full/local/path:/app workflow2-data-science-project`
+
+3. Confirm we can access the Jupyter process by going to the endpoint URL in the container output. You should see the files of the directory you mounted in the previous step in Jupyter.
+
+4. `Ctrl+c` to stop the process

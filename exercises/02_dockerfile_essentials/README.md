@@ -9,7 +9,7 @@ This set of exercises will help you get familiar with Dockerfiles.
 1. Create a directory on your local machine for this workflow.
 
 ```console
-mkdir self-contained-container && cd self-contained-container
+$ mkdir self-contained-container && cd self-contained-container
 ```
 
 2. Create a python file that prints "Hello World" and save it as `hello_world.py`:
@@ -60,7 +60,7 @@ Successfully tagged hello-world:latest
 
 6. Take a look at all stopped containers using `docker ps -a`. Note the `container-name` or `container-id` of the image.
 
-7. Restart the image using `docker start -ia [container-name / container-id]`. You should see `Hello World` printed to the console once again.
+7. Restart the image using `docker start -ia [container-name OR container-id]`. You should see `Hello World` printed to the console once again.
 
 ***Tip:** `-i` attaches STDIN and `-a` attaches STDOUT/STDERR to terminal*
 
@@ -68,18 +68,12 @@ Successfully tagged hello-world:latest
 
 > Confirm you do not need a Docker image anymore before you delete it from your machine
 
-1. Let's pull a [BusyBox](https://en.wikipedia.org/wiki/BusyBox) image from DockerHub. BusyBox is an executible that contains stripped down Unix tools:
+1. Let's delete our `hello-world` image. Confirm image is on the local machine using `docker images`
+
+2. Delete image using `docker rmi`:
 
 ```console
-docker pull busybox
+$ docker rmi hello-world
 ```
 
-2. Confirm image has been pulled using `docker images`
-
-3. Delete busybox image using `docker rmi`:
-
-```console
-docker rmi busybox
-```
-
-4. Confirm image has been deleted using `docker images`
+3. Confirm image has been deleted using `docker images`
