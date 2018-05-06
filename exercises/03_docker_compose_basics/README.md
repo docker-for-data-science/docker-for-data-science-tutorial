@@ -4,17 +4,14 @@ This set of exercises will help you get familiar with the Docker Compose.
 
 ## Exercise A: Run a simple compose file
 
-1. Build a docker-compose.yml file ...
+1. Checkout the code ...
 
-```yaml
-version: '2'
-services:
-app:
-  image: python:3.6.5
-  command: ["python", "-mhttp.server", "8000"]
+```command
+git clone https://github.com/docker-for-data-science/talkvoter.git
+cd talkvoter/
 ```
 
-... then run it.
+... then run it.  Wait for the services to spin up and stabilize (stop producing output.)
 
 ```command
 docker-compose build
@@ -29,6 +26,11 @@ Ctrl-c
 
 2. Build and run in the same step and run in the background.
 
+   - `up` will start the whole application.
+   - `--build` will first build the application before starting it.
+   - `-d` will run the application in the background.
+
+
 ```command
 docker-compose up --build -d
 ```
@@ -39,11 +41,35 @@ See that it's running
 docker-compose ps
 ```
 
+You should see output similar to this.
+ - the `Name` column is the container name
+ - the `Command` column is the command that is running
+ - the `State` column displays if the service is up
+ - the `Ports` column displays the port mapping
+
+```command
+Name                      Command               State    Ports  
+-----------------------------------------------------------------------
+talkvoter_app_1       ./docker-utils/entrypoint- ...   Up      8000/tcp
+talkvoter_db_1        docker-entrypoint.sh postgres    Up      5432/tcp
+talkvoter_predict_1   ./docker-utils/entrypoint- ...   Up      8000/tcp
+
+```
+
+
 Check how it looks when running in Docker
 
 ```command
 docker ps
 ```
+Here are the containers that are started as viewed by `docker ps`.
+
+```command
+b5cf33bcd497        docker4data/predict_api:prod-1.0.1   "./docker-utils/entr…"   About a minute ago   Up About a minute   8000/tcp            talkvoter_predict_1
+ef19b739cffc        docker4data/talkvoter:prod-1.0.1     "./docker-utils/entr…"   About a minute ago   Up About a minute   8000/tcp            talkvoter_app_1
+c5919701310f        postgres:10-alpine                   "docker-entrypoint.s…"   About a minute ago   Up About a minute   5432/tcp            talkvoter_db_1
+```
+
 
 Restart the application
 
@@ -80,16 +106,14 @@ If you do a docker-compose ps, nothing should be running
 
 ## Exercise B: Expose a port
 
-1. Add the port mapping to your compose file
+1. Create a docker-compose.override.yaml with the following contents.
 
 ```yaml
 version: '2'
 services:
-app:
-  image: python:3.6.5
-  command: ["python", "-m", "http.server", "8000"]
-  ports:
-    - "8000:8000"
+  app:
+    ports:
+      - "8000:8000"
 ```
 
 Build and run
@@ -129,8 +153,8 @@ docker-compose exec app /bin/bash
 
 Create an empty file inside of the container, then exit the container
 ```command
-touch /TESTME
-ls -l /TESTME/
+touch /tmp/TESTME
+ls -l /tmp/TESTME
 exit
 ```
 
@@ -138,7 +162,7 @@ Exec back into the container.  Is the file still there?
 
 ```command
 docker-compose exec app /bin/bash
-ls -l /TESTME/
+ls -l /tmp/TESTME
 exit
 ```
 
@@ -146,8 +170,8 @@ exit
 
 ```command
 docker-compose run app /bin/bash
-touch /TESTME2
-ls -l /TESTME2
+touch /tmp/TESTME2
+ls -l /tmp/TESTME2
 exit
 ```
 
@@ -166,21 +190,7 @@ What do you think would happen to the touch files if you ran docker-compose dest
 ## Exercise D: Add a second node and interact
 
 
-1. Build a docker-compose.yml file ...
-
-```yaml
-version: '2'
-services:
-  app:
-    image: python:3.6.5
-    command: ["python", "-m", "http.server", "8000"]
-    ports:
-      - "8000:8000"
-  db:
-    image: postgres:10
-```
-
-... then run it.
+1. Bring the app up.
 
 ```command
 docker-compose up --build -d
@@ -226,115 +236,3 @@ docker-compose down
 
 **Note:** you'll never want to install software outside of a Dockerfile
 like we did above (unless you are playing around)
-
-
-
-## Exercise E: Create a Dockerfile
-
-
-1. Create a Dockerfile
-
-```text
-FROM python:3.6
-RUN pip install "Flask<1.0" psycopg2-binary
-ENV PYTHONPATH=/app/
-RUN mkdir /app/
-WORKDIR /app/
-COPY demo_app.py /app/demo_app.py
-```
-
-Modify your docker-compose.yml file to look like this.
-
-```yaml
-version: '2'
-services:
- app:
-   build: .
-   command: ["flask", "run"]
-   environment:
-     - FLASK_APP=demo_app
-     - DEBUG=True
-     - PORT=8000
-     - DB_PORT=5432
-     - DB_HOST=db
-   ports:
-     - "8000:8000"
- db:
-   image: postgres:10
-```
-
-Create a file called demo_app.py and put the following in it.
-
-
-```python
-import os
-import sys
-import time
-import psycopg2
-from flask import Flask
-app = Flask(__name__)
-
-DEBUG = os.getenv("DEBUG", None)
-PORT = int(os.getenv("PORT", "8000"))
-DB_PORT = int(os.getenv("DB_PORT", "5432"))
-DB_HOST = os.getenv("DB_HOST", "localhost")
-DB_NAME = os.getenv("DB_NAME", "postgres")
-DB_USER = os.getenv("DB_USER", "postgres")
-DB_PASS = os.getenv("DB_PASS", "postgres")
-
-
-def connect():
-  print("Connecting to db", file=sys.stderr)
-  while True:
-      try:
-          conn = psycopg2.connect(
-              f"dbname={DB_NAME} user={DB_USER} port={DB_PORT} host={DB_HOST}")
-      except Exception:
-          print("  trying to connect to db....", file=sys.stderr)
-          time.sleep(5)
-          continue
-      print("Connected to db", file=sys.stderr)
-      break
-  return conn
-
-
-def create_test_table(conn):
-  cur = conn.cursor()
-  cur.execute(
-      "CREATE TABLE IF NOT EXISTS test "
-      "(id serial PRIMARY KEY, num integer);")
-  conn.commit()
-  cur.close()
-
-
-conn = connect()
-create_test_table(conn)
-
-
-@app.route("/")
-def hello():
-  cur = conn.cursor()
-  cur.execute("INSERT INTO test  (num) Values (1);")
-  conn.commit()
-  cur.execute("SELECT * FROM test;")
-  out = ""
-  for record in cur:
-      out += "<br>row {}".format(record)
-  cur.close()
-
-  return ("Hello World! DEBUG {} PORT {} <br> {}".format(
-          DEBUG, PORT, out))
-
-
-app.run(
-  host='0.0.0.0',
-  port=PORT,
-  debug=bool(DEBUG == "True"))
-
-```
-
-Then run it:
-
-```command
-docker-compose up --build -d
-```
