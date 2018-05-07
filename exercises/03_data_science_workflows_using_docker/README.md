@@ -161,10 +161,10 @@ mkdir data-science-project && cd data-science-project
 
 2. Create a `Dockerfile` in the `data-science-project` folder
 
-3. We need to specify which image we are building off of. Let's use `continuumio/miniconda3` as conda is popular in the Data Science community.
+3. We need to specify which image we are building off of. Although [Anaconda](https://hub.docker.com/r/continuumio/miniconda3/) is popular in the Data Science community, we will build off the Debian jessie slim image to not burden the conference wireless.
 
 ```dockerfile
-FROM continuumio/miniconda3
+FROM python:3.6.5-slim
 ```
 
 4. Set the working directory:
@@ -173,12 +173,10 @@ FROM continuumio/miniconda3
 WORKDIR /app
 ```
 
-5. `conda install` some required libraries, make sure to clean up the cache.
+5. `pip install` some required libraries, make sure to clean up the cache.
 
 ```dockerfile
-RUN conda install jupyter -y && \
-    conda install pandas -y && \
-    conda clean -y -all
+RUN pip --no-cache-dir install pandas jupyter
 ```
 
 6. In order to connect to the Jupyter instance that is running inside of the container, we will need to set up port forwarding.
@@ -204,13 +202,11 @@ Complete `Dockerfile` should look as follows:
 ```Dockerfile
 # data-science-project/Dockerfile
 
-FROM continuumio/miniconda3
+FROM python:3.6.5-slim
 
 WORKDIR /app
 
-RUN conda install jupyter -y && \
-    conda install pandas -y && \
-    conda clean -y -all
+RUN pip --no-cache-dir install pandas jupyter
 
 EXPOSE 8888
 
