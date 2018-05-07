@@ -79,8 +79,28 @@ Talk about how it is set up for files and what not, they'll need to do a git pul
 
 ### Step 2: Clone Git Repositories
 
-1.
+1. Create a folder for this tutorial, we recommend `~/docker-for-data-science` as this will be the folder we use in all of our examples.
+
+2. `cd` into folder
+
+3. Download both repositories:
+
+```console
+git clone https://github.com/docker-for-data-science/docker-for-data-science-tutorial.git
+git clone https://github.com/docker-for-data-science/talkvoter.git
+```
 
 ### Step 3: Download Docker Images
 
 Please pre-download Docker images to reduce the strain on the conference WiFi.
+
+1. `cd ~/docker-for-data-science/docker-for-data-science-tutorial/installation_files`
+
+2. Run the shell script: `./download_docker_images.sh`
+
+3. Build images for Talk Recommendation application:
+
+```
+cd ~/docker-for-data-science/talkvoter
+make up
+```
