@@ -4,7 +4,7 @@ This set of exercises will walk you through various use cases using Docker.
 
 ## Exercise A: Self-Contained Container
 
-Jupyter notebooks are the perfect vehicle to share the results of an academic paper or data study. But in order for our notebooks to work, users will need to have access to our data and all the dependencies that were used to produce the original dataset.
+Jupyter notebooks are the perfect vehicle to share the results of an academic paper or data study. But in order for our notebooks to work, users will need to have access to our data and all the dependencies that were used to produce the original calculations.
 
 We refer to this as the ["Works on my Machine" problem](https://blog.codinghorror.com/the-works-on-my-machine-certification-program/)
 
@@ -128,6 +128,8 @@ CMD ["jupyter", "notebook", "--ip='*'", "--port=8888", "--no-browser", "--allow-
 
 ### Push Image to Docker Hub (extra credit)
 
+***TIP:** Please be mindful of the conference WiFi and push the image to Docker Hub at a later date.*
+
 1. Log in to your user account using `docker login`
 
 2. Push image to Docker Hub using `docker push`
@@ -194,6 +196,26 @@ VOLUME /app
 8. Start Jupyter when the container launches:
 
 ```Dockerfile
+CMD ["jupyter", "notebook", "--ip='*'", "--port=8888", "--no-browser", "--allow-root"]
+```
+
+Complete `Dockerfile` should look as follows:
+
+```Dockerfile
+# data-science-project/Dockerfile
+
+FROM continuumio/miniconda3
+
+WORKDIR /app
+
+RUN conda install jupyter -y && \
+    conda install pandas -y && \
+    conda clean -y -all
+
+EXPOSE 8888
+
+VOLUME /app
+
 CMD ["jupyter", "notebook", "--ip='*'", "--port=8888", "--no-browser", "--allow-root"]
 ```
 
