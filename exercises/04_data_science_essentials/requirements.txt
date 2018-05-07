@@ -1,0 +1,13 @@
+Flask==0.12.2
+Flask_RESTful==0.3.6
+numpy==1.14.2
+pandas==0.22.0
+python-dateutil==2.7.2
+pytz==2018.4
+scikit-learn==0.19.1
+scipy==1.0.1
+six==1.11.0
+sklearn==0.0
+jupyter
+spacy==2.0.11
+
