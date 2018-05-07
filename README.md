@@ -100,7 +100,7 @@ Please pre-download Docker images to reduce the strain on the conference WiFi.
 
 3. Build images for Talk Recommendation application:
 
-```
+```console
 cd ~/docker-for-data-science/talkvoter
-make up
+docker-compose build
 ```
