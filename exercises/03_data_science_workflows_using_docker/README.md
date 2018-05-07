@@ -144,7 +144,7 @@ Users are able to download our image using `docker pull`.
 
 Those of us who work on a team know how hard it is to create a standardize development environment. Or if you have ever updated a dependency and had everything break, you understand the importance of keeping development environments isolated.
 
-Using Docker, we can creaate a project / team image with our development environment and mount a volume with our notebooks and data.
+Using Docker, we can create a project / team image with our development environment and mount a volume with our notebooks and data.
 
 The benefits of this workflow are that we can:
 * Separate out projects
