@@ -51,6 +51,8 @@ Learn how to become a Full-Stack Data Scientist!
 
 3. Use package manager to install Docker-Compose.
 
+Might need to add user account to `docker` group.
+
 #### Windows
 
 1. Download [VirtualBox for Windows Hosts](https://www.virtualbox.org/wiki/Downloads).
