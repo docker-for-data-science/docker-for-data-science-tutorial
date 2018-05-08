@@ -55,27 +55,19 @@ Learn how to become a Full-Stack Data Scientist!
 
 1. Download [VirtualBox for Windows Hosts](https://www.virtualbox.org/wiki/Downloads).
 
-2. Download VirtualBox image containing all required files and containers. We also have USB sticks containing these images to reduce strain on the conference WiFi.
+2. [Download VirtualBox image](https://s3.us-east-2.amazonaws.com/docker-for-data-science/docker-for-data-science.ova) containing all required files and containers. We also have USB sticks containing these images to reduce strain on the conference WiFi.
 
-3. Open VirtualBox Manager
+3. Open VirtualBox Manager.
 
-4. Click New
+4. File > Import Applicance > point to the file you just downloaded. Import it in.
 
-5. Enter name: `docker-for-data-science`
+5. Double-click VM to start an instance.
 
-6. Select OS: `Linux`
+6. Login: `osboxes` | Password: `osboxes.org` | Root password: `osboxes.org`
 
-7. Select Version: `Arch Linux (64-bit)`
+The image you download contains images as well as repositories that were cloned to `~/docker-for-data-science`.
 
-8. Select Memory: `2048 MB`
-
-9. For hard disk, you will need to put at the image you downloaded in Step 2.
-
-10. Double-click VM to start an instance.
-
-11. Login: `osboxes` | Password: `osboxes.org` | Root password: `osboxes.org`
-
-Talk about how it is set up for files and what not, they'll need to do a git pull and they are done
+7. Update cloned repos by going into each folder and doing a `git pull`.
 
 ### Step 2: Clone Git Repositories
 
