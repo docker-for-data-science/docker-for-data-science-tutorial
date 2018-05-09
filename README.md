@@ -55,6 +55,10 @@ Might need to add user account to `docker` group.
 
 #### Windows
 
+Note: Windows 10 users can use the Linux subsystem to install Docker and Docker-Compose. [Instructions from a post we found on Medium](https://medium.com/@sebagomez/installing-the-docker-client-on-ubuntus-windows-subsystem-for-linux-612b392a44c4). Please also make sure to install Docker-Compose when you are installing Docker.
+
+Otherwise, we have created a VM image. USB sticks with the image will be available at the tutorial
+
 1. Download [VirtualBox for Windows Hosts](https://www.virtualbox.org/wiki/Downloads).
 
 2. [Download VirtualBox image](https://s3.us-east-2.amazonaws.com/docker-for-data-science/docker-for-data-science.ova) containing all required files and containers. We also have USB sticks containing these images to reduce strain on the conference WiFi.
