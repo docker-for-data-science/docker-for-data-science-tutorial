@@ -1,6 +1,5 @@
 from model import prediction
 from flask import Flask, jsonify
-from pprint import pprint
 
 app = Flask(__name__)
 
