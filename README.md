@@ -55,7 +55,9 @@ Might need to add user account to `docker` group.
 
 #### Windows
 
-Note: Windows 10 users can use the Linux subsystem to install Docker and Docker-Compose. [Instructions from a post we found on Medium](https://medium.com/@sebagomez/installing-the-docker-client-on-ubuntus-windows-subsystem-for-linux-612b392a44c4). Please also make sure to install Docker-Compose when you are installing Docker.
+> **Note:** Windows 10 users can use the Linux subsystem to install Docker and Docker-Compose. [Instructions from a post we found on Medium](https://medium.com/@sebagomez/installing-the-docker-client-on-ubuntus-windows-subsystem-for-linux-612b392a44c4).
+>
+> Please also make sure to install Docker-Compose when you are installing Docker. Then proceed to Step 2
 
 Otherwise, we have created a VM image. USB sticks with the image will be available at the tutorial
 
@@ -73,7 +75,7 @@ Otherwise, we have created a VM image. USB sticks with the image will be availab
 
 The image you download contains images as well as repositories that were cloned to `~/docker-for-data-science`.
 
-7. Update cloned repos by going into each folder and doing a `git pull`.
+7. Update cloned repos by going into each folder and doing a `git pull`. Skip Steps 2 and 3.
 
 ### Step 2: Clone Git Repositories
 
