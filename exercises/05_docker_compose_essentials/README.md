@@ -1,4 +1,4 @@
-# Docker Basics
+# Docker-Compose Essentials
 
 This set of exercises will help you get familiar with the Docker Compose.
 
@@ -35,7 +35,7 @@ Ctrl-c
 docker-compose up --build -d
 ```
 
-See that it's running
+3. See that it's running
 
 ```command
 docker-compose ps
@@ -48,7 +48,7 @@ You should see output similar to this.
  - the `Ports` column displays the port mapping
 
 ```command
-Name                      Command               State    Ports  
+Name                      Command               State    Ports
 -----------------------------------------------------------------------
 talkvoter_app_1       ./docker-utils/entrypoint- ...   Up      8000/tcp
 talkvoter_db_1        docker-entrypoint.sh postgres    Up      5432/tcp
@@ -56,12 +56,12 @@ talkvoter_predict_1   ./docker-utils/entrypoint- ...   Up      8000/tcp
 
 ```
 
-
-Check how it looks when running in Docker
+4. Check how it looks when running in Docker
 
 ```command
 docker ps
 ```
+
 Here are the containers that are started as viewed by `docker ps`.
 
 ```command
@@ -70,8 +70,7 @@ ef19b739cffc        docker4data/talkvoter:prod-1.0.1     "./docker-utils/entr…
 c5919701310f        postgres:10-alpine                   "docker-entrypoint.s…"   About a minute ago   Up About a minute   5432/tcp            talkvoter_db_1
 ```
 
-
-Restart the application
+5. Restart the application
 
 ```command
 docker-compose restart
@@ -83,26 +82,25 @@ You can restart the service based on the service name as defined in the docker-c
 docker-compose restart app
 ```
 
-Stop the compose application
+6. Stop the compose application
 
 ```command
 docker-compose stop
 ```
 
-Re-Start the compose application
+7. Restart the compose application
 
 ```command
 docker-compose start
 ```
 
-Destroy compose application
+8. Destroy compose application
 
 ```command
 docker-compose down
 ```
 
 If you do a docker-compose ps, nothing should be running
-
 
 ## Exercise B: Expose a port
 
@@ -116,26 +114,24 @@ services:
       - "8000:8000"
 ```
 
-Build and run
+2. Build and run
 
 ```command
 docker-compose up --build -d
 ```
 
-In a web browser, visit the following url:
+3. In a web browser, visit the following url:
 
-http://localhost:8000/
+[http://localhost:8000/](http://localhost:8000/)
 
-Destroy compose application
+4. Destroy compose application
 
 ```command
 docker-compose down
 ```
 
 
-
 ## Exercise C: Exec vs Run
-
 
 1. Start the app again
 
@@ -151,14 +147,15 @@ docker-compose up --build -d
 docker-compose exec app /bin/bash
 ```
 
-Create an empty file inside of the container, then exit the container
+3. Create an empty file inside of the container, then exit the container
+
 ```command
 touch /tmp/TESTME
 ls -l /tmp/TESTME
 exit
 ```
 
-Exec back into the container.  Is the file still there?
+4. Exec back into the container.  Is the file still there?
 
 ```command
 docker-compose exec app /bin/bash
@@ -166,7 +163,7 @@ ls -l /tmp/TESTME
 exit
 ```
 
-3. Enter the container using the run command and touch a file and exit.
+5. Enter the container using the run command and touch a file and exit.
 
 ```command
 docker-compose run app /bin/bash
@@ -175,7 +172,7 @@ ls -l /tmp/TESTME2
 exit
 ```
 
-Enter the container again and look for the touch file.
+6. Enter the container again and look for the touch file.
 
 ```command
 docker-compose run app /bin/bash
@@ -183,12 +180,11 @@ ls -l /TESTME2
 exit
 ```
 
-Is the file still there?  What do you notice is different between run and exec?
+7. Is the file still there?  What do you notice is different between run and exec?
 What do you think would happen to the touch files if you ran docker-compose destroy?
 
 
 ## Exercise D: Add a second node and interact
-
 
 1. Bring the app up.
 
@@ -196,43 +192,44 @@ What do you think would happen to the touch files if you ran docker-compose dest
 docker-compose up --build -d
 ```
 
-See what's running
+2. See what's running
 
 ```command
 docker-compose ps
 ```
 
-Enter the running app container with exec
+3. Enter the running app container with exec
 
 ```command
 docker-compose exec app /bin/bash
 ```
 
-While inside of the container, ping the db service
+4. While inside of the container, ping the db service
 
 ```command
 ping -c 5 db
 ```
 
-Notice that you can refer to the other service by name inside of the container
+5. Notice that you can refer to the other service by name inside of the container
 
-Install postgres client
+6. Install postgres client
 
 ```bash
 apt update
 apt install -y postgresql-client
 ```
 
-Connect to the database
-```
+7. Connect to the database
+
+```bash
 psql -U postgres -h db postgres
 ```
 
-Destroy compose application
+8. Destroy compose application
 
 ```command
 docker-compose down
 ```
 
 **Note:** you'll never want to install software outside of a Dockerfile
-like we did above (unless you are playing around)
+like we did above (unless you are experimenting)

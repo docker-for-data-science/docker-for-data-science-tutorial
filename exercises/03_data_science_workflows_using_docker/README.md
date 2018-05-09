@@ -4,7 +4,7 @@ This set of exercises will walk you through various use cases using Docker.
 
 ## Exercise A: Self-Contained Container
 
-Jupyter notebooks are the perfect vehicle to share the results of an academic paper or data study. But in order for our notebooks to work, users will need to have access to our data and all the dependencies that were used to produce the original dataset.
+Jupyter notebooks are the perfect vehicle to share the results of an academic paper or data study. But in order for our notebooks to work, users will need to have access to our data and all the dependencies that were used to produce the original calculations.
 
 We refer to this as the ["Works on my Machine" problem](https://blog.codinghorror.com/the-works-on-my-machine-certification-program/)
 
@@ -128,6 +128,8 @@ CMD ["jupyter", "notebook", "--ip='*'", "--port=8888", "--no-browser", "--allow-
 
 ### Push Image to Docker Hub (extra credit)
 
+***TIP:** Please be mindful of the conference WiFi and push the image to Docker Hub at a later date.*
+
 1. Log in to your user account using `docker login`
 
 2. Push image to Docker Hub using `docker push`
@@ -142,7 +144,7 @@ Users are able to download our image using `docker pull`.
 
 Those of us who work on a team know how hard it is to create a standardize development environment. Or if you have ever updated a dependency and had everything break, you understand the importance of keeping development environments isolated.
 
-Using Docker, we can creaate a project / team image with our development environment and mount a volume with our notebooks and data.
+Using Docker, we can create a project / team image with our development environment and mount a volume with our notebooks and data.
 
 The benefits of this workflow are that we can:
 * Separate out projects
@@ -159,10 +161,10 @@ mkdir data-science-project && cd data-science-project
 
 2. Create a `Dockerfile` in the `data-science-project` folder
 
-3. We need to specify which image we are building off of. Let's use `continuumio/miniconda3` as conda is popular in the Data Science community.
+3. We need to specify which image we are building off of. Although [Anaconda](https://hub.docker.com/r/continuumio/miniconda3/) is popular in the Data Science community, we will build off the Debian jessie slim image to not burden the conference wireless.
 
 ```dockerfile
-FROM continuumio/miniconda3
+FROM python:3.6.5-slim
 ```
 
 4. Set the working directory:
@@ -171,12 +173,10 @@ FROM continuumio/miniconda3
 WORKDIR /app
 ```
 
-5. `conda install` some required libraries, make sure to clean up the cache.
+5. `pip install` some required libraries, make sure to clean up the cache.
 
 ```dockerfile
-RUN conda install jupyter -y && \
-    conda install pandas -y && \
-    conda clean -y -all
+RUN pip --no-cache-dir install pandas jupyter
 ```
 
 6. In order to connect to the Jupyter instance that is running inside of the container, we will need to set up port forwarding.
@@ -194,6 +194,24 @@ VOLUME /app
 8. Start Jupyter when the container launches:
 
 ```Dockerfile
+CMD ["jupyter", "notebook", "--ip='*'", "--port=8888", "--no-browser", "--allow-root"]
+```
+
+Complete `Dockerfile` should look as follows:
+
+```Dockerfile
+# data-science-project/Dockerfile
+
+FROM python:3.6.5-slim
+
+WORKDIR /app
+
+RUN pip --no-cache-dir install pandas jupyter
+
+EXPOSE 8888
+
+VOLUME /app
+
 CMD ["jupyter", "notebook", "--ip='*'", "--port=8888", "--no-browser", "--allow-root"]
 ```
 
