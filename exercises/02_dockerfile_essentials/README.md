@@ -68,12 +68,18 @@ Successfully tagged hello-world:latest
 
 > Confirm you do not need a Docker image anymore before you delete it from your machine
 
-1. Let's delete our `hello-world` image. Confirm image is on the local machine using `docker images`
-
-2. Delete image using `docker rmi`:
+1. Let's pull a [BusyBox](https://en.wikipedia.org/wiki/BusyBox) image from DockerHub. BusyBox is an executible that contains stripped down Unix tools:
 
 ```console
-$ docker rmi hello-world
+docker pull busybox
 ```
 
-3. Confirm image has been deleted using `docker images`
+2. Confirm image has been pulled using docker images
+
+3. Delete busybox image:
+
+```console
+docker rmi busybox
+```
+
+4. Confirm image has been deleted using `docker images`
