@@ -201,7 +201,7 @@ docker-compose ps
 3. Enter the running app container with exec
 
 ```command
-docker-compose exec app /bin/bash
+docker-compose exec -u root app /bin/bash
 ```
 
 4. While inside of the container, ping the db service
