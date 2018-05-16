@@ -4,7 +4,9 @@
 
 Materials for "Docker for Data Science" tutorial presented at PyCon 2018 in Cleveland, OH.
 
-[Slides](http://bit.ly/docker-for-data-pycon)
+[YouTube](https://www.youtube.com/watch?v=jbb1dbFaovg) / [Slides](http://bit.ly/docker-for-data-pycon)
+
+---
 
 <!-- TOC -->
 
