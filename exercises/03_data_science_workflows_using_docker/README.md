@@ -135,7 +135,7 @@ CMD ["jupyter", "notebook", "--ip='*'", "--port=8888", "--no-browser", "--allow-
 2. Push image to Docker Hub using `docker push`
 
 ```console
-docker [docker-hub-user-name]/workflow1-self-contained
+docker push [docker-hub-user-name]/workflow1-self-contained
 ```
 
 Users are able to download our image using `docker pull`.
